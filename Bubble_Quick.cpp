@@ -71,7 +71,7 @@ string limpar_valores(const string& nome){
     return prato_final;
 }
 
-void printar(const string& sort, Prato* pratos, int n, int lim = 100){
+void printar(const string& sort, Prato* pratos, int n, int lim = 100){ // limite para leitura do csv
     cout << "Resultado do " << sort << " (100 primeiros pratos):\n";
     for (int i = 0; i < min(n, lim); ++i){
         string novo_prato = limpar_valores(pratos[i].nome);
@@ -105,6 +105,8 @@ int main(){
         string palavra;
         getline(lin, palavra, ',');
         pratos[id].prioridade = stoi(palavra);
+        getline(lin, palavra, ',');
+        pratos[id].tempo = stoi(palavra);
         getline(lin, palavra, ',');
         pratos[id].nome = palavra;
         ++id;
