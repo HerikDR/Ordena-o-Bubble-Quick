@@ -73,8 +73,8 @@ string limpar_valores(const string& nome){
     return prato_final;
 }
 
-void printar(const string& sort, Prato* pratos, int n, int lim = 100){ // limite para leitura do csv
-    cout << "Resultado do " << sort << " (100 primeiros pratos):\n";
+void printar(const string& sort, Prato* pratos, int n, int lim = 300000){ // limite para leitura do csv
+    cout << "Resultado do " << sort << "\n";
     for (int i = 0; i < min(n, lim); ++i){
         string novo_prato = limpar_valores(pratos[i].nome);
         cout << novo_prato << "\n";
@@ -82,7 +82,7 @@ void printar(const string& sort, Prato* pratos, int n, int lim = 100){ // limite
 }
 
 int main(){
-    ifstream arq("restaurante_pratos2.csv");
+    ifstream arq("restaurante_pratos.csv"); // arquivo CSV com os dados
     if (!arq.is_open()){
         cerr << "Erro" << endl;
         return 1;
