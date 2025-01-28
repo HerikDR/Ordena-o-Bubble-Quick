@@ -3,7 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <cctype>
+#include <chrono>
 using namespace std;
+using namespace chrono;
 
 struct Prato{
     int prioridade;
@@ -118,16 +120,26 @@ int main(){
     for (int i = 0; i < num_pratos; ++i){
         exec_quick[i] = pratos[i];
     }
+    auto inicio_quick = high_resolution_clock::now();
     quick(exec_quick, 0, num_pratos - 1);
+    auto fim_quick = high_resolution_clock::now();
+    auto duracao_quick = duration_cast<milliseconds>(fim_quick - inicio_quick);
 
     Prato* exec_bubble = new  Prato[num_pratos];
     for (int i = 0; i < num_pratos; ++i){
         exec_bubble[i] = pratos [i];
     }
+    auto inicio_bubble = high_resolution_clock::now();
     bubble(exec_bubble, num_pratos);
+    auto fim_bubble = high_resolution_clock::now();
+    auto duracao_bubble = duration_cast<milliseconds>(fim_bubble - inicio_bubble);
 
     printar("Bubble", exec_bubble, num_pratos);
     printar("Quick", exec_quick, num_pratos);
+
+    cout << "\nTempo de execução dos algoritmos:\n";
+    cout << "Bubble: " << duracao_bubble.count() << "ms\n";
+    cout << "Quick: " << duracao_quick.count() << "ms\n";
 
     delete[] pratos;
     delete[] exec_quick;
